@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Suplyon página inicial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+<style>
+/* VOICE  minimalista e confiante, no espírito de Wise, Loggi e Linear: título enorme, muito branco, cor chapada
+   IDEA   uma prateleira de almoxarifado em traço fino, e uma folha de papel toalha que se desenrola pela página
+   PICTURE rolos, copos e borrifador em traço azul que se desenham sozinhos; a folha picotada vira o "como funciona"
+   COLOUR branco, tinta #0B1240, traço Azul Suplyon #0A27FF, toque de Azul Claro #00C2FF; blocos chapados em azul
+   TYPE   Poppins 600 bem grande e apertado nos títulos, Poppins 400 no texto
+   LAYOUT título em largura total, texto e botões numa linha abaixo, prateleira inteira; no celular a cena recorta os objetos */
+:root{color-scheme:light dark;--bg:light-dark(#FFFFFF,#070B24);--ink:light-dark(#0B1240,#EAEEFF);--mute:light-dark(#5A6285,#A3ACD6);--line:light-dark(#0A27FF,#7F95FF);--cyan:#00C2FF;--sheet:light-dark(#E5F7FF,#11214F);--rule:light-dark(#E3E7F5,#1E2754);--blue:#0A27FF}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+section{padding-block:clamp(64px,9vw,128px)}
+h1,h2,h3{margin:0;font-weight:600;text-wrap:balance}
+h2{font-size:clamp(32px,4.4vw,56px);line-height:1.02;letter-spacing:-.035em}
+h3{font-size:18px;line-height:1.3;letter-spacing:-.01em}
+p{margin:0}
+.lede{color:var(--mute);max-width:52ch;margin-top:18px;font-size:17px}
+.note{font-size:13px;color:var(--mute);border-bottom:1px solid var(--rule);padding:8px 16px;text-align:center}
+nav{display:flex;align-items:center;gap:32px;padding-block:22px}
+nav .logo img{height:34px;width:auto}
+nav .links{display:flex;gap:28px;margin-left:auto;font-size:15px}
+nav .links a,.tl{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1.5px no-repeat;transition:background-size .3s}
+nav .links a:hover,.tl:hover{background-size:100% 1.5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font:500 16px/1 Poppins,sans-serif;text-decoration:none;border:1.5px solid var(--ink);color:var(--ink);background:transparent;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s,transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.solid{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.solid:hover{background:#0820D6}
+.btn svg{width:18px;height:18px;flex:none}
+nav .btn{min-height:44px;padding:0 18px;font-size:15px}
+:focus-visible{outline:2.5px solid var(--cyan);outline-offset:3px}
+.logo-dark{display:none}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .logo-light{display:none}:root:not([data-theme=light]) .logo-dark{display:block}}
+:root[data-theme=dark] .logo-light{display:none}
+:root[data-theme=dark] .logo-dark{display:block}
+.hero{padding-top:clamp(32px,6vw,88px);padding-bottom:0}
+.hero h1{font-size:clamp(42px,7vw,96px);line-height:.96;letter-spacing:-.045em;max-width:14ch}
+.hero-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px 48px;margin-top:clamp(24px,3vw,40px)}
+.hero .sub{color:var(--mute);font-size:18px;max-width:42ch}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.scene{display:block;width:100%;height:auto;margin-top:clamp(28px,4vw,56px)}
+.o{fill:var(--bg);stroke:var(--line);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.l{fill:none;stroke:var(--line);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.c{fill:none;stroke:var(--cyan);stroke-width:2.5;stroke-linecap:round}
+.ico .o,.ico .l,.ico .c{stroke-width:2}
+.sheet{fill:none;stroke:var(--line);stroke-width:2.5;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.6s cubic-bezier(.4,.1,.2,1) .3s forwards}
+.sheet-fill{fill:var(--sheet);opacity:0;animation:fade .8s ease 2.5s forwards}
+.perf{stroke:var(--line);stroke-width:1.5;stroke-dasharray:3 4;opacity:0;animation:fade .6s ease 2.7s forwards}
+.spin{transform-box:fill-box;transform-origin:center;animation:spin 2.6s cubic-bezier(.4,.1,.2,1) .3s,spin 30s linear 2.9s infinite}
+.bob{animation:bob 5s ease-in-out infinite}
+.puff circle{fill:var(--cyan);opacity:0;transform-box:fill-box;transform-origin:center;animation:puff 4s ease-out infinite}
+.puff circle:nth-child(2){animation-delay:.12s}
+.puff circle:nth-child(3){animation-delay:.24s}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fade{to{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{0%,70%,100%{transform:translateY(0)}78%{transform:translateY(-14px)}86%{transform:translateY(0)}90%{transform:translateY(-4px)}}
+@keyframes puff{0%,60%{opacity:0;transform:translate(0,0) scale(.4)}66%{opacity:.9}90%,100%{opacity:0;transform:translate(26px,-6px) scale(1.4)}}
+.js-draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s cubic-bezier(.4,.1,.2,1)}
+.in .js-draw{stroke-dashoffset:0}
+.shelf-note{display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-block:16px;font-size:14px;color:var(--mute)}
+.cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:56px;border-top:1px solid var(--rule)}
+.cat{padding:32px 24px 8px 0;border-right:1px solid var(--rule)}
+.cat+.cat{padding-left:24px}
+.cat:last-child{border-right:0}
+.cat svg{width:76px;height:76px;display:block;margin-bottom:22px;overflow:visible}
+.cat ul{list-style:none;padding:0;margin:12px 0 0;color:var(--mute);font-size:15px}
+.cat li{padding:3px 0}
+.i-roll .s{stroke-dasharray:40;animation:unroll 4s ease-in-out infinite}
+@keyframes unroll{0%,15%{stroke-dashoffset:40}55%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:40}}
+.i-roll .r{transform-box:fill-box;transform-origin:center;animation:spin 4s ease-in-out infinite}
+.i-cup .top{animation:drop 4s ease-in infinite}
+@keyframes drop{0%,10%{transform:translateY(-22px);opacity:0}25%{opacity:1}40%{transform:translateY(0)}46%{transform:translateY(-3px)}52%,88%{transform:translateY(0);opacity:1}100%{transform:translateY(0);opacity:0}}
+.i-spray .puff circle{animation-duration:3s}
+.i-mop .m{transform-box:view-box;transform-origin:44px 6px;animation:sweep 3s ease-in-out infinite}
+@keyframes sweep{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+.small{font-size:13px;color:var(--mute);margin-top:28px}
+.who-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,5vw,72px);margin-top:56px}
+.aud{display:grid;grid-template-columns:96px minmax(0,1fr);gap:24px;border-top:1px solid var(--rule);padding-top:28px}
+.aud svg{width:96px;height:96px;overflow:visible}
+.aud p{color:var(--mute);margin-top:8px}
+.aud small{display:block;margin-top:14px;font-size:14px}
+.band{background:var(--blue);color:#fff;--line:#FFFFFF;--bg:#0A27FF}
+.band .lede{color:#D6DEFF}
+.strip{position:relative;margin-top:64px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:rgba(255,255,255,.08);border-block:2px solid #fff;margin-left:46px}
+.strip::after{content:"";position:absolute;right:-1px;top:-2px;bottom:-2px;width:28px;background:linear-gradient(90deg,transparent,var(--blue))}
+.roll-end{position:absolute;left:-58px;top:50%;width:84px;height:84px;margin-top:-42px}
+.roll-end .r{transform-box:fill-box;transform-origin:center;animation:spin 18s linear infinite}
+.step{padding:30px 26px 32px;border-left:1.5px dashed rgba(255,255,255,.5)}
+.step:first-child{border-left:0;padding-left:46px}
+.step b{display:block;font-weight:500;color:var(--cyan);font-size:14px}
+.step h3{margin-top:4px}
+.step p{color:#D6DEFF;font-size:15px;margin-top:8px}
+.why-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px;margin-top:48px}
+.why-list div{border-top:1px solid var(--rule);padding:24px 0}
+.why-list p{color:var(--mute);margin-top:6px;font-size:15px}
+.quote{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px);align-items:start}
+.contacts{margin-top:32px;display:grid;gap:14px;font-size:16px;justify-items:start}
+.contacts span{display:block;color:var(--mute);font-size:13px}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 28px}
+.f{display:grid;gap:4px}
+.full{grid-column:1/-1}
+label{font-size:13px;color:var(--mute)}
+input,select,textarea{font:16px/1.4 Poppins,sans-serif;color:var(--ink);background:transparent;border:0;border-bottom:1.5px solid var(--rule);border-radius:0;padding:10px 0;min-height:46px;width:100%;transition:border-color .2s}
+select{background:var(--bg)}
+input:focus,select:focus,textarea:focus{outline:0;border-bottom-color:var(--line)}
+textarea{min-height:90px;resize:vertical}
+input::placeholder,textarea::placeholder{color:var(--mute);opacity:.6}
+form .btn{justify-self:start}
+.err{grid-column:1/-1;color:#D93A3F;font-size:14px;display:none}
+.err.on{display:block}
+.result{grid-column:1/-1;display:none;border:1.5px dashed var(--line);border-radius:14px;padding:18px}
+.result.on{display:block}
+.result pre{white-space:pre-wrap;font:14px/1.6 Poppins,sans-serif;color:var(--mute);margin:8px 0 14px}
+.result .row{display:flex;flex-wrap:wrap;gap:10px}
+.result .btn{min-height:44px;font-size:15px}
+footer{background:var(--blue);color:#fff;padding-block:clamp(56px,7vw,96px) 28px}
+.big{font-size:clamp(32px,5vw,64px);font-weight:600;letter-spacing:-.04em;line-height:1;max-width:14ch;margin-bottom:28px}
+footer .btn{border-color:#fff;color:#fff}
+footer .btn.solid{background:#fff;color:var(--blue)}
+.foot{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:32px;font-size:15px;margin-top:clamp(48px,6vw,80px);padding-top:32px;border-top:1px solid rgba(255,255,255,.25)}
+.foot img{height:34px;width:auto;margin-bottom:14px}
+.foot p,.foot li{color:#DCE3FF}
+.foot h4{margin:0 0 10px;font-weight:500;font-size:15px}
+.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.foot a{text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.legal{margin-top:40px;font-size:13px;color:#C9D3FF;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.sheet{stroke-dashoffset:0}.sheet-fill,.perf{opacity:1}.puff circle{opacity:0}.js-draw{stroke-dashoffset:0}html{scroll-behavior:auto}}
+@media(max-width:900px){.quote{grid-template-columns:minmax(0,1fr)}.cats{grid-template-columns:repeat(2,minmax(0,1fr))}.cat:nth-child(2){border-right:0}.cat:nth-child(3){padding-left:0}.cat:nth-child(n+3){border-top:1px solid var(--rule)}.who-grid{grid-template-columns:minmax(0,1fr)}.strip{grid-template-columns:repeat(2,minmax(0,1fr))}.step:nth-child(4){border-left:0;padding-left:46px}.step:nth-child(n+4){border-top:1.5px dashed rgba(255,255,255,.5)}.step:nth-child(5){border-top:1.5px dashed rgba(255,255,255,.5)}}
+@media(max-width:720px){nav .links{display:none}nav .btn{margin-left:auto}.strip{grid-template-columns:minmax(0,1fr);margin-left:0;margin-top:80px;border-block:0;border-inline:2px solid #fff}.strip::after{display:none}.roll-end{left:50%;top:-42px;margin:0 0 0 -42px}.step,.step:first-child,.step:nth-child(4){border-left:0;border-top:1.5px dashed rgba(255,255,255,.5);padding:24px 22px}.step:first-child{border-top:0;padding-top:56px}.why-list{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.cats{grid-template-columns:minmax(0,1fr)}.cat,.cat+.cat,.cat:nth-child(3){padding:24px 0 8px;border-right:0;display:grid;grid-template-columns:64px minmax(0,1fr);gap:0 18px}.cat+.cat{border-top:1px solid var(--rule)}.cat svg{width:56px;height:56px}.cat ul{margin-top:4px}.aud{grid-template-columns:64px minmax(0,1fr);gap:16px}.aud svg{width:64px;height:64px}form{grid-template-columns:minmax(0,1fr)}.foot{grid-template-columns:minmax(0,1fr)}.cta{width:100%}.cta .btn{flex:1 1 100%}nav .btn span{display:none}nav .btn{padding:0 14px}}
+</style>
+</head>
+<body>
+<p class="note">Protótipo para discussão. Textos provisórios; o formulário não envia dados.</p>
+
+<header class="wrap">
+  <nav>
+    <a class="logo" href="#topo" aria-label="Suplyon, início"><img class="logo-light" src="logo_color.png" alt="Suplyon" width="128" height="34"><img class="logo-dark" src="logo_white.png" alt="Suplyon" width="128" height="34"></a>
+    <div class="links"><a href="#produtos">Produtos</a><a href="#para-quem">Para quem</a><a href="#como-funciona">Como funciona</a><a href="#cotacao">Cotação</a></div>
+    <a class="btn" href="https://wa.me/5547997839970" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.2 8L3 21l1.1-4.6A9 9 0 1 1 21 12z"/></svg><span>WhatsApp</span></a>
+  </nav>
+</header>
+
+<main id="topo">
+<section class="hero">
+  <div class="wrap">
+    <h1>Suprimentos corporativos com inteligência.</h1>
+    <div class="hero-row">
+      <p class="sub">Papéis, higiene, limpeza e descartáveis para condomínios e pequenas empresas de Joinville. Você manda a lista, nós cotamos e combinamos a reposição.</p>
+      <div class="cta">
+        <a class="btn solid" href="https://wa.me/5547997839970?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Suplyon%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o." target="_blank" rel="noopener">Pedir cotação no WhatsApp</a>
+        <a class="btn" href="#cotacao">Enviar lista</a>
+      </div>
+    </div>
+
+    <svg class="scene" id="scene" viewBox="0 96 1080 204" role="img" aria-label="Prateleira desenhada com rolos de papel higiênico, copos, um rolo de papel toalha que se desenrola pela página e um borrifador">
+      <defs>
+        <g id="tr">
+          <path class="o" d="M0 0V74A34 10 0 0 0 68 74V0"/>
+          <ellipse class="o" cx="34" cy="0" rx="34" ry="10"/>
+          <ellipse class="l" cx="34" cy="0" rx="10" ry="3"/>
+          <path class="l" d="M50 14V64" opacity=".35"/>
+        </g>
+      </defs>
+      <path class="l" d="M0 290H1080" opacity=".25"/>
+      <use href="#tr" x="30" y="206"/>
+      <use href="#tr" x="102" y="206"/>
+      <use href="#tr" x="66" y="122"/>
+      <g>
+        <path class="o" d="M232 290H268L273 230H227Z"/>
+        <path class="l" d="M227 230H273M226 242H274M226 254H274"/>
+      </g>
+      <g class="bob"><path class="o" d="M230 224H270L278 160H222Z"/><ellipse class="o" cx="250" cy="160" rx="28" ry="5"/><path class="c" d="M236 182H264"/></g>
+      <path class="l" d="M380 180L338 290M380 180L422 290"/>
+      <path class="sheet-fill" d="M432 180V282H1040V290H420C440 270 432 230 432 180Z"/>
+      <path class="sheet" d="M432 180C432 240 438 282 470 286H1040"/>
+      <path class="perf" d="M560 279V289M680 279V289M800 279V289M920 279V289"/>
+      <circle class="o" cx="380" cy="180" r="52"/>
+      <g class="spin"><circle class="l" cx="380" cy="180" r="38"/><path class="l" d="M380 156A24 24 0 1 1 356 180"/><circle class="o" cx="380" cy="180" r="11"/><path class="c" d="M380 128A52 52 0 0 1 430 166"/></g>
+      <g transform="translate(640 0)">
+        <path class="o" d="M0 200H110V282H0Z"/>
+        <path class="o" d="M0 200L22 182H132L110 200Z"/>
+        <path class="o" d="M110 200L132 182V264L110 282Z"/>
+        <path class="c" d="M48 200V218M48 200L70 182"/>
+        <image href="sym_color.png" x="36" y="228" width="38" height="42"/>
+      </g>
+      <g transform="translate(830 0)">
+        <ellipse class="o" cx="40" cy="262" rx="40" ry="20"/>
+        <ellipse class="l" cx="40" cy="262" rx="26" ry="12"/>
+        <ellipse class="o" cx="40" cy="262" rx="9" ry="4"/>
+        <path class="l" d="M80 262C90 272 100 280 120 282" opacity=".6"/>
+      </g>
+      <g transform="translate(990 0)">
+        <rect class="o" x="0" y="196" width="58" height="90" rx="14"/>
+        <rect class="l" x="10" y="216" width="38" height="36" rx="5" opacity=".4"/>
+        <rect class="o" x="17" y="176" width="24" height="20"/>
+        <path class="o" d="M10 150H50L56 164L48 176H14Z"/>
+        <path class="o" d="M50 156H72V162H54Z"/>
+        <path class="l" d="M20 176L13 200"/>
+        <g class="puff"><circle cx="78" cy="158" r="3"/><circle cx="80" cy="152" r="2.2"/><circle cx="81" cy="164" r="2.6"/></g>
+      </g>
+    </svg>
+    <div class="shelf-note"><span>Joinville · SC</span><span>(47) 99783-9970 · suplyoncontato@gmail.com · @suply.on</span></div>
+  </div>
+</section>
+
+<section id="produtos">
+  <div class="wrap">
+    <h2>O que oferecemos</h2>
+    <p class="lede">Os materiais de uso diário que acabam todo mês, reunidos em um fornecedor só.</p>
+    <div class="cats">
+      <div class="cat">
+        <svg class="ico i-roll" viewBox="0 0 72 72" aria-hidden="true"><path class="l s" d="M50 34V64H24"/><circle class="o" cx="30" cy="34" r="22"/><g class="r"><circle class="l" cx="30" cy="34" r="14"/><circle class="o" cx="30" cy="34" r="5"/><path class="c" d="M30 12A22 22 0 0 1 50 26"/></g></svg>
+        <div><h3>Papéis institucionais</h3><ul><li>Papel higiênico rolão</li><li>Papel toalha interfolhado</li><li>Higiênico interfolhado</li></ul></div>
+      </div>
+      <div class="cat">
+        <svg class="ico i-spray" viewBox="0 0 72 72" aria-hidden="true"><rect class="o" x="16" y="30" width="30" height="38" rx="8"/><rect class="o" x="24" y="20" width="14" height="10"/><path class="o" d="M16 6H42L46 14L40 20H20Z"/><path class="o" d="M42 9H54V13H44Z"/><g class="puff"><circle cx="58" cy="11" r="2.4"/><circle cx="61" cy="6" r="1.8"/><circle cx="62" cy="15" r="2"/></g></svg>
+        <div><h3>Higiene e limpeza</h3><ul><li>Detergentes e desinfetantes</li><li>Sabonete e álcool em gel</li><li>Panos e microfibra</li></ul></div>
+      </div>
+      <div class="cat">
+        <svg class="ico i-cup" viewBox="0 0 72 72" aria-hidden="true"><path class="o" d="M24 68H48L52 30H20Z"/><path class="l" d="M21 40H51M21.6 50H50.4"/><g class="top"><path class="o" d="M22 40H50L55 6H17Z"/><ellipse class="o" cx="36" cy="6" rx="19" ry="3.5"/><path class="c" d="M27 20H45"/></g></svg>
+        <div><h3>Descartáveis</h3><ul><li>Copos plásticos</li><li>Sacos de lixo</li><li>Embalagens</li></ul></div>
+      </div>
+      <div class="cat">
+        <svg class="ico i-mop" viewBox="0 0 72 72" aria-hidden="true"><path class="l" d="M10 68H64" opacity=".3"/><g class="m"><path class="l" d="M44 6V48"/><path class="o" d="M28 48H60L62 58H26Z"/><path class="c" d="M30 58V66M37 58V66M44 58V66M51 58V66M58 58V66"/></g></svg>
+        <div><h3>Utensílios e mais</h3><ul><li>Mops, rodos e vassouras</li><li>Dispensers</li><li>Outros itens sob consulta</li></ul></div>
+      </div>
+    </div>
+    <p class="small">Itens ilustrativos. A lista é montada conforme a necessidade de cada cliente; produtos químicos dependem de regularização.</p>
+  </div>
+</section>
+
+<section id="para-quem" style="padding-top:0">
+  <div class="wrap">
+    <h2>Para quem atendemos</h2>
+    <p class="lede">Lugares com consumo previsível, que compram com frequência e não têm um setor de compras só para isso.</p>
+    <div class="who-grid">
+      <article class="aud">
+        <svg viewBox="0 0 96 96" class="ico draw" aria-hidden="true"><path class="l" d="M6 88H90" opacity=".3"/><rect class="o" x="22" y="14" width="40" height="74"/><rect class="o" x="62" y="40" width="16" height="48"/><path class="l" d="M32 26h6M46 26h6M32 40h6M46 40h6M32 54h6M46 54h6"/><path class="c" d="M36 88V70H48V88"/></svg>
+        <div><h3>Condomínios</h3><p>Síndicos, zeladores e administradoras que precisam manter papel, sacos de lixo e produtos de limpeza à mão, sem correr ao mercado a cada falta.</p><small>Síndico · Zelador · Administradora</small></div>
+      </article>
+      <article class="aud">
+        <svg viewBox="0 0 96 96" class="ico draw" aria-hidden="true"><path class="l" d="M6 88H90" opacity=".3"/><path class="o" d="M12 88V50L32 62V50L52 62V40H84V88Z"/><rect class="o" x="66" y="18" width="10" height="22"/><path class="l" d="M22 76h8M40 76h8M60 76h8"/><path class="c" d="M71 12c4-4 0-6 4-9"/></svg>
+        <div><h3>Pequenas empresas</h3><p>Indústrias, escritórios, clínicas e academias em que alguém do administrativo cuida das compras junto com outras tarefas.</p><small>Indústrias · Escritórios · Clínicas · Academias</small></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona" class="band">
+  <div class="wrap">
+    <h2>Como funciona</h2>
+    <p class="lede">Quatro passos, como as folhas de um rolo. Depois do primeiro pedido, o ciclo recomeça no ritmo do seu consumo.</p>
+    <div class="strip">
+      <svg class="roll-end ico" viewBox="0 0 84 84" aria-hidden="true"><circle class="o" cx="42" cy="42" r="40"/><g class="r"><circle class="l" cx="42" cy="42" r="28"/><path class="l" d="M42 26A16 16 0 1 1 26 42"/><circle class="o" cx="42" cy="42" r="8"/><path class="c" d="M42 2A40 40 0 0 1 80 30"/></g></svg>
+      <div class="step"><b>Passo 1</b><h3>Conversa</h3><p>Você conta o que usa, quanto e com que frequência, pelo WhatsApp ou numa visita rápida.</p></div>
+      <div class="step"><b>Passo 2</b><h3>Cotação sem compromisso</h3><p>Enviamos uma cotação por escrito com itens equivalentes. Você compara e decide.</p></div>
+      <div class="step"><b>Passo 3</b><h3>Reposição recorrente</h3><p>Combinamos a frequência de entrega de acordo com o seu consumo.</p></div>
+      <div class="step"><b>Passo 4</b><h3>Acompanhamento</h3><p>Revisamos o que foi usado para ajustar quantidades e evitar falta ou sobra.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Por que a Suplyon</h2>
+    <p class="lede">Somos uma empresa nova de Joinville. Em vez de promessas, explicamos como queremos trabalhar.</p>
+    <div class="why-list">
+      <div><h3>Um contato para vários itens</h3><p>Papel, limpeza e descartáveis numa mesma conversa, em vez de vários fornecedores.</p></div>
+      <div><h3>Cotação clara e por escrito</h3><p>Você sabe o que está comprando antes de decidir, sem pressão para fechar.</p></div>
+      <div><h3>Daqui de Joinville</h3><p>Atendimento direto com o responsável pela empresa.</p></div>
+      <div><h3>Consumo organizado</h3><p>Registramos seus pedidos para ajudar a planejar a próxima reposição.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="cotacao" style="padding-top:0">
+  <div class="wrap quote">
+    <div>
+      <h2>Peça uma cotação</h2>
+      <p class="lede">Conte o que você usa e com que frequência. Respondemos por escrito, sem compromisso.</p>
+      <div class="contacts">
+        <a class="tl" href="https://wa.me/5547997839970" target="_blank" rel="noopener"><span>WhatsApp</span>(47) 99783-9970</a>
+        <a class="tl" href="mailto:suplyoncontato@gmail.com"><span>E-mail</span>suplyoncontato@gmail.com</a>
+        <a class="tl" href="https://instagram.com/suply.on" target="_blank" rel="noopener"><span>Instagram</span>@suply.on</a>
+      </div>
+    </div>
+    <form id="qf" novalidate>
+      <div class="f"><label for="q-nome">Seu nome</label><input id="q-nome" autocomplete="name" placeholder="Ana Souza"></div>
+      <div class="f"><label for="q-org">Empresa ou condomínio</label><input id="q-org" placeholder="Residencial Jardim"></div>
+      <div class="f"><label for="q-tipo">Tipo de local</label><select id="q-tipo"><option>Condomínio</option><option>Indústria</option><option>Escritório</option><option>Clínica ou consultório</option><option>Academia</option><option>Outro</option></select></div>
+      <div class="f"><label for="q-bairro">Bairro em Joinville</label><input id="q-bairro" placeholder="América"></div>
+      <div class="f full"><label for="q-itens">O que você costuma comprar</label><textarea id="q-itens" placeholder="Papel higiênico rolão, papel toalha interfolhado, sacos de lixo 100 L, copos 180 ml"></textarea></div>
+      <div class="f"><label for="q-freq">Com que frequência compra</label><select id="q-freq"><option>Toda semana</option><option>A cada 15 dias</option><option selected>Uma vez por mês</option><option>Não sei ainda</option></select></div>
+      <div class="f"><label for="q-contato">Telefone ou e-mail</label><input id="q-contato" placeholder="Para respondermos"></div>
+      <p class="err" id="q-err">Preencha seu nome e pelo menos um item para montarmos a mensagem.</p>
+      <button class="btn solid" type="submit">Montar pedido de cotação</button>
+      <div class="result" id="q-res" aria-live="polite">
+        <strong>Sua mensagem está pronta</strong>
+        <pre id="q-msg"></pre>
+        <div class="row">
+          <a class="btn solid" id="q-wa" href="#" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
+          <a class="btn" id="q-mail" href="#">Enviar por e-mail</a>
+          <button class="btn" type="button" id="q-copy">Copiar texto</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="big">Vamos organizar seus suprimentos?</p>
+    <div class="cta"><a class="btn solid" href="https://wa.me/5547997839970" target="_blank" rel="noopener">Falar no WhatsApp</a><a class="btn" href="#cotacao">Pedir cotação</a></div>
+    <div class="foot">
+      <div><img src="logo_white.png" alt="Suplyon" width="128" height="34"><p>Suprimentos corporativos com inteligência.<br>Joinville · SC</p></div>
+      <div><h4>Contato</h4><ul><li><a href="https://wa.me/5547997839970" target="_blank" rel="noopener">WhatsApp (47) 99783-9970</a></li><li><a href="mailto:suplyoncontato@gmail.com">suplyoncontato@gmail.com</a></li><li><a href="https://instagram.com/suply.on" target="_blank" rel="noopener">Instagram @suply.on</a></li></ul></div>
+      <div><h4>Navegação</h4><ul><li><a href="#produtos">Produtos</a></li><li><a href="#para-quem">Para quem</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#cotacao">Cotação</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Suplyon. CNPJ em formalização.</span><span>Protótipo de página inicial, versão para discussão.</span></div>
+  </div>
+</footer>
+
+<script>
+{
+const sc=document.getElementById('scene');
+const fit=()=>{sc.setAttribute('viewBox',innerWidth<640?'10 100 520 200':'0 96 1080 204')};
+fit();addEventListener('resize',fit);
+
+const calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!calm&&'IntersectionObserver' in window){
+  const drawables=document.querySelectorAll('.cat svg, .aud svg');
+  drawables.forEach(s=>s.querySelectorAll('path:not(.s),circle:not(.puff circle),rect,ellipse').forEach(el=>{el.setAttribute('pathLength','1');el.classList.add('js-draw')}));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.4});
+  drawables.forEach(s=>io.observe(s));
+}
+
+const f=document.getElementById('qf'),res=document.getElementById('q-res'),err=document.getElementById('q-err'),out=document.getElementById('q-msg');
+const v=id=>document.getElementById(id).value.trim();
+f.addEventListener('submit',e=>{
+ e.preventDefault();
+ if(!v('q-nome')||!v('q-itens')){err.classList.add('on');res.classList.remove('on');return}
+ err.classList.remove('on');
+ const lines=['Olá, Suplyon! Gostaria de uma cotação.','','Nome: '+v('q-nome')];
+ lines.push(v('q-org')?'Local: '+v('q-org')+' ('+v('q-tipo')+')':'Tipo: '+v('q-tipo'));
+ if(v('q-bairro'))lines.push('Bairro: '+v('q-bairro'));
+ lines.push('Frequência de compra: '+v('q-freq'),'Itens: '+v('q-itens'));
+ if(v('q-contato'))lines.push('Contato: '+v('q-contato'));
+ const msg=lines.join('\n');
+ out.textContent=msg;
+ document.getElementById('q-wa').href='https://wa.me/5547997839970?text='+encodeURIComponent(msg);
+ document.getElementById('q-mail').href='mailto:suplyoncontato@gmail.com?subject='+encodeURIComponent('Pedido de cotação')+'&body='+encodeURIComponent(msg);
+ res.classList.add('on');
+});
+const cp=document.getElementById('q-copy');
+cp.addEventListener('click',()=>{
+ navigator.clipboard.writeText(out.textContent).then(()=>{cp.textContent='Copiado'},()=>{cp.textContent='Selecione e copie o texto acima'});
+ setTimeout(()=>{cp.textContent='Copiar texto'},2500);
+});
+}
+</script>
+</body>
+</html>
